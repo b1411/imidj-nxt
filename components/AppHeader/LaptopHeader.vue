@@ -14,7 +14,7 @@
             </VBtn>
         </div>
         <div class="basis-1/4 xl:basis-1/2">
-            <v-text-field :density=density color="primary" hide-details="true" v-model="searchQuery" clearable
+            <v-text-field class="rounded-md" :density=density color="primary" hide-details="true" v-model="searchQuery" clearable
                 label="Поиск товара" type="text" variant="outlined">
                 <template v-slot:append-inner>
                     <v-icon color="primary">mdi-magnify</v-icon>

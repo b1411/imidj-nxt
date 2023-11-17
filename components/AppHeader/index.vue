@@ -12,7 +12,7 @@ import LaptopHeader from "./LaptopHeader.vue";
 import MobileHeader from "./MobileHeader.vue";
 
 const isMobile = useMobile().isMobile;
-const isHeaderVisible = ref(false);
+const isHeaderVisible = ref(true);
 const route = useRoute();
 
 let routeName = computed(() => {
@@ -20,31 +20,31 @@ let routeName = computed(() => {
 });
 
 let positioning = ref({
-    "fixed": true,
-    "sticky": false
+    "fixed": false,
+    "sticky": true
 });
 
-const checkScroll = () => {
-    isHeaderVisible.value = window.scrollY > 200;
-}
+// const checkScroll = () => {
+//     isHeaderVisible.value = window.scrollY > 200;
+// }
 
-watchEffect(() => {
-    if (typeof window !== "undefined") {
-        if (routeName.value === "index") {
-            positioning.value.fixed = true;
-            positioning.value.sticky = false;
-            window.addEventListener("scroll", checkScroll);
-            isHeaderVisible.value = window.scrollY > 200;
-        }
-        else {
-            window.removeEventListener("scroll", checkScroll);
-            positioning.value.sticky = true;
-            positioning.value.fixed = false;
-            isHeaderVisible.value = true;
+// watchEffect(() => {
+//     if (typeof window !== "undefined") {
+//         if (routeName.value === "index") {
+//             positioning.value.fixed = true;
+//             positioning.value.sticky = false;
+//             window.addEventListener("scroll", checkScroll);
+//             isHeaderVisible.value = window.scrollY > 200;
+//         }
+//         else {
+//             window.removeEventListener("scroll", checkScroll);
+//             positioning.value.sticky = true;
+//             positioning.value.fixed = false;
+//             isHeaderVisible.value = true;
 
-        }
-    }
-});
+//         }
+//     }
+// });
 </script>
 
 <style scoped lang="scss">

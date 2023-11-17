@@ -1,22 +1,28 @@
 <template>
-    <div class="h-[60vh] w-full">
-        <Swiper :slides-per-view="1" :modules="[EffectFade]" :effect="'fade'" :loop="true" :autoplay="{ delay: 5000 }"
-            class="h-full">
-            <SwiperSlide>
-                <div class="main-slide">
-                    <div>
-                        <Transition>
-                            <h1 class="text-[#197149]">IMIDZH.KZ</h1>
-                        </Transition>
-                        <p class="text-2xl text-[#197149] text-center font-bold">Лучший магазин имиджевой
-                            продукции</p>
-                    </div>
+    <div class="container mt-[60px] flex md:flex-row flex-col items-center gap-6">
+        <div class="main-slide h-[60vh] 2xl:h-full md:w-1/2 w-[90%]">
+            <div>
+                <Transition>
+                    <h1>IMIDZH.KZ</h1>
+                </Transition>
+                <p class="text-2xl  text-center font-bold">Лучший магазин имиджевой
+                    продукции</p>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-2 md:grid-rows-2 md:w-1/2 w-[90%] gap-3 overflow-hidden">
+            <div v-for="category in popularCategories" :style="{
+                backgroundColor: category.bg
+            }" class="relative h-full w-full aspect-square rounded-xl p-3">
+                <NuxtLink class="top-0 left-0 rounded-xl inline-block absolute z-10 w-full h-full"
+                    :to="`/categories?name=${category.paramName}`"></NuxtLink>
+                <p class="text-white text-xl font-bold">
+                    {{ category.name }}
+                </p>
+                <div class="absolute bottom-[-20%] left-[30%] rotate-[-15deg] w-full">
+                    <img class="w-[90%] h-auto object-cover" :src="category.image" alt="" />
                 </div>
-            </SwiperSlide>
-            <SwiperSlide>
-
-            </SwiperSlide>
-        </Swiper>
+            </div>
+        </div>
     </div>
     <div class=" mt-3">
         <SelectedTags is-animated />
@@ -30,21 +36,22 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { EffectFade } from "swiper/modules";
 import NewProducts from "@/components/NewProducts";
-import "swiper/css";
-import "swiper/css/effect-fade";
+
+const popularCategories = [
+    { name: "Ручки", paramName: "pens", bg: "#6A1B9A", image: "" },
+    { name: "Термосы, термостаканы", paramName: "thermoses", bg: "#00ACC1" },
+    { name: "Блокноты", paramName: "notebooks", bg: "#BCAAA4" },
+    { name: "Футболки, Поло", paramName: "tshirts", bg: "#F44336", image: "https://i.imgur.com/uwiDKUb.png" }
+]
 </script>
 
 <style scoped lang="scss">
 .main-slide {
     position: relative;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #1e3b7249, #2a52989d), url("https://i.imgur.com/pKUyI6e.png");
-    background-size: cover;
+    border-radius: 10px;
+    // background: linear-gradient(45deg, #1e3b7249, #2a52989d), url("https://i.imgur.com/pKUyI6e.png");
+    background: linear-gradient(45deg, #1e3b7249, #2a52989d);
 
     div {
         position: absolute;
@@ -55,9 +62,10 @@ import "swiper/css/effect-fade";
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        color: white;
 
         h1 {
-            font-size: clamp(30px, 18vw, 120px);
+            font-size: 4rem;
             font-weight: 700;
         }
     }
