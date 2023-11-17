@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-[60px] flex md:flex-row flex-col items-center gap-6">
-        <div class="main-slide h-[60vh] 2xl:h-full md:w-1/2 w-[90%]">
+        <div class="main-slide h-full md:w-1/2 w-[90%]">
             <div>
                 <Transition>
                     <h1>IMIDZH.KZ</h1>
