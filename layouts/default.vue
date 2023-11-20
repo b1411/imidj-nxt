@@ -2,7 +2,7 @@
     <div>
         <VApp>
             <AppHeader />
-
+            <Drawer />
             <slot />
         </VApp>
 

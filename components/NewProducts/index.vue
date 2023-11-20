@@ -12,7 +12,7 @@ import ProductCard from "@/components/ProductCard";
 const products = ref([]);
 const showProducts = ref([]);
 const getProducts = async () => {
-    const res = await fetch("https://fakestoreapi.com/products");
+    const res = await fetch("https://api.escuelajs.co/api/v1/products");
     products.value = await res.json();
 };
 const isMobile = useMobile().isMobile;

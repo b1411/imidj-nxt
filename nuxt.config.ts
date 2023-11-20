@@ -11,6 +11,7 @@ export default defineNuxtConfig({
                 config.plugins.push(vuetify({ autoImport: true }));
             });
         },
+        "@pinia/nuxt",
     ],
     ssr: true,
     css: ["~/assets/css/main.css"],
@@ -29,9 +30,10 @@ export default defineNuxtConfig({
     },
     app: {
         head: {
-            charset: "  utf-8",
+            charset: "utf-8",
             viewport: "width=device-width, initial-scale=1",
             title: "IMIDZH.KZ - Интернет-магазин одежды и аксессуаров",
         },
     },
+    // plugins: ["~/plugins/parse.js"],
 });

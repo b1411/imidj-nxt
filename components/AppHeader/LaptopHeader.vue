@@ -6,29 +6,32 @@
             </NuxtLink>
         </div>
         <div>
-            <VBtn :size=buttonSize variant="flat" color="primary">
+            <VBtn :size=buttonSize variant="flat" color="primary" v-on:click.prevent="toggleCatalogue()">
                 <template v-slot:prepend>
                     <v-icon>mdi-menu</v-icon>
                 </template>
                 Каталог
             </VBtn>
+            <div v-show="isCatalogueVisible" class="grid grid-cols-2 bg-white absolute z-[99] top-[100%] left-[12.5%]"> 
+                <CatalogueList />
+            </div>
         </div>
         <div class="basis-1/4 xl:basis-1/2">
-            <v-text-field class="rounded-md" :density=density color="primary" hide-details="true" v-model="searchQuery" clearable
-                label="Поиск товара" type="text" variant="outlined">
+            <v-text-field class="rounded-md" :density=density color="primary" hide-details="true" v-model="searchQuery"
+                clearable label="Поиск товара" type="text" variant="outlined">
                 <template v-slot:append-inner>
                     <v-icon color="primary">mdi-magnify</v-icon>
                 </template>
             </v-text-field>
         </div>
         <div>
-            <v-badge>
-                <v-btn icon color="primary" class="mr-3" :size=size>
+            <v-badge class="mr-3">
+                <v-btn icon color="primary" :size=size>
                     <v-icon>mdi-account-outline</v-icon>
                 </v-btn>
             </v-badge>
-            <v-badge>
-                <v-btn icon color="primary" class="mr-3" :size=size>
+            <v-badge class="mr-3" :content="favourite.getFavoriteCount">
+                <v-btn icon color="primary" :size=size>
                     <v-icon>mdi-heart-outline</v-icon>
                 </v-btn>
             </v-badge>
@@ -61,6 +64,8 @@ const updateSize = () => {
     }
 };
 
+const favourite = useFavoriteStore();
+
 onMounted(() => {
     updateSize();
     window.addEventListener("resize", () => {
@@ -73,5 +78,11 @@ onUnmounted(() => {
         updateSize();
     });
 });
+
+const isCatalogueVisible = ref(false);
+
+const toggleCatalogue = () => {
+    isCatalogueVisible.value = !isCatalogueVisible.value;
+}
 
 </script>

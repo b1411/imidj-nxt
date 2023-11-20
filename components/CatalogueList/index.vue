@@ -1,8 +1,8 @@
 <template>
-    <div class=" py-4 px-5">
+    <div class="py-4 px-5">
         <ul>
-            <li v-for="(item, index) in catalogueList" :key="index" class=" border-b border-[#f7f7f7] py-3">
-                <a href="" class="text-[#2D2D2D]">{{ item }}</a>
+            <li v-for="(item, index) in catalogueList" :key="index" class=" border-b border-[#f7f7f7] py-2">
+                <NuxtLink to="/" class="text-[#2D2D2D]">{{ item }}</NuxtLink>
             </li>
         </ul>
     </div>
