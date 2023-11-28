@@ -36,4 +36,7 @@ export default defineNuxtConfig({
         },
     },
     // plugins: ["~/plugins/parse.js"],
+    imports: {
+        dirs: ["composables/**"],
+    },
 });

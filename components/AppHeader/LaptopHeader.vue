@@ -5,15 +5,25 @@
                 <img src="/fake-logo.png" alt="Logo" class="h-[40px]" />
             </NuxtLink>
         </div>
-        <div>
+        <div class="relative">
             <VBtn :size=buttonSize variant="flat" color="primary" v-on:click.prevent="toggleCatalogue()">
                 <template v-slot:prepend>
                     <v-icon>mdi-menu</v-icon>
                 </template>
                 Каталог
             </VBtn>
-            <div v-show="isCatalogueVisible" class="grid grid-cols-2 bg-white absolute z-[99] top-[100%] left-[12.5%]"> 
-                <CatalogueList />
+            <div v-if="isCatalogueVisible"
+                class="grid grid-cols-2 bg-white absolute z-[99] top-[100%] w-max px-8 py-5 rounded-md shadow-md gap-x-3">
+                <ul>
+                    <li v-for="category in firstHalfCategories" class="py-2 hover:bg-gray-50 px-2">
+                        <NuxtLink :to="`/categories?name=${category.paramName}`">{{ category.name }}</NuxtLink>
+                    </li>
+                </ul>
+                <ul>
+                    <li v-for="category in secondHalfCategories" class="py-2 hover:bg-gray-50 px-2">
+                        <NuxtLink :to="`/categories?name=${category.paramName}`">{{ category.name }}</NuxtLink>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="basis-1/4 xl:basis-1/2">
@@ -84,5 +94,15 @@ const isCatalogueVisible = ref(false);
 const toggleCatalogue = () => {
     isCatalogueVisible.value = !isCatalogueVisible.value;
 }
+
+const categories = useCategories().categories;
+
+const firstHalfCategories = computed(() => {
+    return categories.slice(0, categories.length / 2);
+})
+
+const secondHalfCategories = computed(() => {
+    return categories.slice(categories.length / 2 + 1);
+})
 
 </script>

@@ -51,6 +51,11 @@ export default {
             },
             gridTemplateRows: {
               "header": "max-content max-content 1fr max-content",
+            },
+            colors: {
+                primary: "#197149",
+                secondary: "#FFD700",
+                
             }
         },
     },

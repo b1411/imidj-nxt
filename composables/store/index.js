@@ -45,3 +45,23 @@ export const useFavoriteStore = defineStore("favorite", () => {
         getFavoriteCount,
     };
 });
+
+export const useCategories = defineStore("categories", () => {
+    const categories = reactive([
+        { name: "Ручки", paramName: "pens" },
+        { name: "Термосы, термостаканы", paramName: "thermoses" },
+        { name: "Бутылки для питья", paramName: "bottles" },
+        { name: "Кружки", paramName: "mugs" },
+        { name: "Блокноты", paramName: "notebooks" },
+        { name: "Ежедневники", paramName: "diaries" },
+        { name: "Зонты", paramName: "umbrellas" },
+        { name: "PowerBank", paramName: "powerbanks" },
+        { name: "Кардхолдеры, визитницы", paramName: "cardholders" },
+        { name: "Рюкзаки, сумки для ноутбука", paramName: "backpacks" },
+        { name: "Брелоки", paramName: "keychains" },
+        { name: "Футболки, Поло", paramName: "tshirts" },
+    ]);
+    return {
+        categories,
+    };
+});

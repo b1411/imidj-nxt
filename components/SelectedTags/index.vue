@@ -1,7 +1,7 @@
 <template>
     <ul class="container flex flex-row gap-4 flex-wrap justify-center">
         <li v-for="category in selectedCategories" :key="category"
-            class="py-1 px-3 text-[#2D2D2D] text-md mb-2 gradient-border">
+            class="py-1 px-3 text-gray-700 text-md mb-2 gradient-border hover:text-white hover:bg-[#197149] my-transition-colors">
             <NuxtLink :to="`/categories?name=${category.paramName}`">
                 {{ category.name }}
             </NuxtLink>
@@ -38,10 +38,13 @@ const selectedCategories = [
 
 <style scoped>
 .gradient-border {
-    border: double 1px transparent;
+    border: 1px solid #197149;
     border-radius: 10px;
-    background-image: linear-gradient(#F7F7F7, #F7F7F7), linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
+}
+
+.my-transition-colors {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 450ms;
 }
 </style>

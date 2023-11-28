@@ -16,6 +16,8 @@ const getProducts = async () => {
     products.value = await res.json();
 };
 const isMobile = useMobile().isMobile;
+
+const parse = useParse();
 onMounted(async () => {
     await getProducts();
     watchEffect(() => {
@@ -25,6 +27,20 @@ onMounted(async () => {
             showProducts.value = products.value.slice(0, 9);
         }
     });
+
+    let productsQuery = new parse.Query("products");
+    productsQuery.include("category_id");
+
+    productsQuery.limit(9);
+
+    const products2 = await productsQuery.find();
+    let products2Array = Array.from(products2.values());
+    for (let product of products2Array) {
+        (async () => {
+            let category = await product.get("category_id").fetch();
+            console.log(category.get("category_name"));
+        })();
+    }
 });
 onUnmounted(() => {
     products.value = [];

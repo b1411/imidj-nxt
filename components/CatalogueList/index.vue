@@ -2,7 +2,7 @@
     <div class="py-4 px-5">
         <ul>
             <li v-for="(item, index) in catalogueList" :key="index" class=" border-b border-[#f7f7f7] py-2">
-                <NuxtLink to="/" class="text-[#2D2D2D]">{{ item }}</NuxtLink>
+                <NuxtLink :to="`/categories?name=${item.paramName}`" class="text-[#2D2D2D]">{{ item.name }}</NuxtLink>
             </li>
         </ul>
     </div>
@@ -11,6 +11,6 @@
 
 <script setup>
 import { reactive } from "vue";
-const catalogueList = reactive(["Ручки", "Термосы, термостаканы", "Бутылки для питья", "Кружки", "Блокноты", "Ежедневники", "Зонты", "PowerBank", "Кардхолдеры, визитницы", "Рюкзаки, сумки для ноутбука", "Брелоки", "Футболки, Поло", "Толстовки, Худи", "Кепки", "Шопперы", "Календари"])
+const catalogueList = useCategories().categories;
 
 </script>

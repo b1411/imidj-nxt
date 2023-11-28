@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen w-screen absolute z-[230] top-0 left-0 bg-white">
+    <div class="h-full w-screen absolute z-[230] top-0 left-0 bg-white">
         <span class="loader absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"></span>
     </div>
 </template>
