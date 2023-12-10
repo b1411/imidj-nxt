@@ -1,63 +1,33 @@
 <template>
-    <transition name="fade" :css="true">
-        <div v-if="isHeaderVisible" id="header" :class="positioning" class="top-0 left-0 w-full shadow-md z-[99] bg-white">
+    <Transitio0n enter-active-class="animate__animated animate__fadeIn">
+        <div id="header" class="fixed top-0 left-0 w-full shadow-md z-[99] bg-white">
             <laptop-header v-if="!isMobile"></laptop-header>
             <mobile-header v-else></mobile-header>
         </div>
-    </transition>
+    </Transition>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import LaptopHeader from "./LaptopHeader.vue";
 import MobileHeader from "./MobileHeader.vue";
-
+import "animate.css";
+import { gsap } from "gsap";
 const isMobile = useMobile().isMobile;
-const isHeaderVisible = ref(true);
-const route = useRoute();
 
-let routeName = computed(() => {
-    return route.name;
-});
+function onBeforeEnter(el: Element): void {
+    gsap.set(el, {
+        opacity: 0,
+        y: -100,
+    })
+}
 
-let positioning = ref({
-    "fixed": false,
-    "sticky": true
-});
+function onEnter(el: Element, done: () => void): void {
+    gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        onComplete: done,
+    })
+}
 
-// const checkScroll = () => {
-//     isHeaderVisible.value = window.scrollY > 200;
-// }
-
-// watchEffect(() => {
-//     if (typeof window !== "undefined") {
-//         if (routeName.value === "index") {
-//             positioning.value.fixed = true;
-//             positioning.value.sticky = false;
-//             window.addEventListener("scroll", checkScroll);
-//             isHeaderVisible.value = window.scrollY > 200;
-//         }
-//         else {
-//             window.removeEventListener("scroll", checkScroll);
-//             positioning.value.sticky = true;
-//             positioning.value.fixed = false;
-//             isHeaderVisible.value = true;
-
-//         }
-//     }
-// });
 </script>
-
-<style scoped lang="scss">
-.fade-enter-active,
-.fade-leave-active {
-    transition: transform 0.3s ease-in-out;
-}
-
-.fade-enter-from {
-    transform: translateY(-100%);
-}
-
-.fade-leave-to {
-    transform: translateY(-100%);
-}
-</style>

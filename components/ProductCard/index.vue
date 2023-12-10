@@ -12,12 +12,15 @@
         <v-rating color="primary" :readonly="true" density="compact" :size="size" :length="5"
             :model-value="product.rating.rate"></v-rating> -->
         <v-card-actions class="">
-            <v-btn v-if="!isMobile" prepend-icon="mdi-cart-outline" color="primary" variant="elevated"
-                v-on:click.prevent="toggleCart(product)">{{ inCart ? 'Удалить' : 'В корзину' }}
-            </v-btn>
-            <v-btn v-else icon color="primary" v-on:click.prevent="toggleCart(product)">
-                <v-icon>{{ inCart ? 'mdi-cart' : 'mdi-cart-outline' }}</v-icon>
-            </v-btn>
+            <transition mode="out-in" enter-active-class="animate__animated animate__fadeIn">
+                <v-btn v-if="!isMobile" prepend-icon="mdi-cart-outline" color="primary" variant="elevated"
+                    v-on:click.prevent="toggleCart(product)">{{ inCart ? 'Удалить' : 'В корзину' }}
+                </v-btn>
+                <v-btn v-else icon color="primary" v-on:click.prevent="toggleCart(product)">
+                    <v-icon>{{ inCart ? 'mdi-cart' : 'mdi-cart-outline' }}</v-icon>
+                </v-btn>
+            </transition>
+
             <v-btn icon color="primary" v-on:click.prevent="toggleFavorite(product)">
                 <v-icon>{{ inFavorite ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
             </v-btn>
@@ -26,6 +29,7 @@
 </template>
 
 <script setup>
+import "animate.css"
 defineProps({
     product: {
         type: Object,

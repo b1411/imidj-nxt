@@ -1,133 +1,109 @@
-
 <template>
-    <div class="container mt-[60px] flex md:flex-row flex-col items-center gap-6">
-        <div class="h-full min-h-[400px] md:w-1/2 w-[90%]">
-            <Swiper :modules="[EffectFade]" id="swiper" effect="fade" :fade-effect="{ crossFade: 1 }" class="h-full"
-                :allow-touch-move="false">
-                <SwiperSlide class="main-slide">
+    <div class="w-full screen-height main-slide">
+        <div class="max-w-[900px] w-full h-full mx-auto flex flex-row items-center">
+            <div class="text-primary font-bold">
+                <Transition :appear="true" enter-active-class="animate__animated animate__fadeInLeft">
                     <div>
-                        <h1>
-                            IMIDZH.KZ
-                        </h1>
-                        <p>
-                            Интернет-магазин сувенирной продукции
-                        </p>
+                        <h1>IMIDZH.KZ</h1>
+                        <h4>Товары лучшего качества с вашим имиджем</h4>
+                    </div>
+                </Transition>
+            </div>
+        </div>
+    </div>
+    <div class="mt-[60px]">
+        <div class="max-w-[900px] w-full mx-auto relative px-4">
+            <Swiper :modules="[Navigation, Autoplay, EffectFade]" :space-between="500" :autoplay="{
+                delay: 3000,
+                disableOnInteraction: false
+            }" :loop="true" :navigation="{
+    enabled: true,
+    prevEl: prev,
+    nextEl: next
+}">
+                <SwiperSlide class="bg-amber-300 rounded-md">
+                    <div class="px-5 py-4 text-gray-900">
+                        <h3>Кружки</h3>
+                        <p>Кружки с вашим имиджем</p>
                     </div>
                 </SwiperSlide>
-                <SwiperSlide>
-                    <h3>Ручки</h3>
+                <SwiperSlide class="bg-[#FBBC17] rounded-md">
+                    <div class="px-5 py-4 text-gray-900">
+                        <h3>Термосы и термостаканы</h3>
+                        <p>Термосы и термостаканы с вашим имиджем</p>
+                    </div>
                 </SwiperSlide>
-                <SwiperSlide>
-                    <h3>Термосы, термостаканы</h3>
+                <SwiperSlide class="bg-[#F6A12D] rounded-md">
+                    <div class="px-5 py-4 text-gray-900">
+                        <h3>Кепки</h3>
+                        <p>Кепки с вашим имиджем</p>
+                    </div>
                 </SwiperSlide>
-                <SwiperSlide>
-                    <h3>Блокноты</h3>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <h3>Футболки, Поло</h3>
+                <SwiperSlide class="bg-[#ED6A5A] rounded-md">
+                    <div class="px-5 py-4 text-gray-900">
+                        <h3>Футболки и поло</h3>
+                        <p>Футболки с вашим имиджем</p>
+                    </div>
                 </SwiperSlide>
             </Swiper>
+            <div ref="prev" v-if="!isMobile" class="absolute -left-[30px] top-1/2 -translate-y-1/2 z-20 text-xl cursor-pointer">
+                <v-icon color="primary">mdi-chevron-left</v-icon>
+            </div>
+            <div ref="next" v-if="!isMobile" class="absolute -right-[30px] top-1/2 -translate-y-1/2 z-20 text-xl cursor-pointer">
+                <v-icon color="primary">mdi-chevron-right</v-icon>
+            </div>
         </div>
-        <div class="h-full grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 md:w-1/2 w-[90%] gap-3">
-            <div v-for="category in popularCategories" :style="{
-                backgroundColor: category.bg
-            }" @mouseenter="swiperSlideTo(popularCategories.indexOf(category) + 1)" @mouseleave="swiperSlideTo(0)"
-                class="relative h-full w-full aspect-square rounded-md p-3 overflow-hidden hover:scale-[1.02] transition-all">
-                <NuxtLink class="top-0 left-0 rounded-xl inline-block absolute z-10 w-full h-full"
-                    :to="`/categories?name=${category.paramName}`"></NuxtLink>
-                <p class="text-white text-xl font-bold">
-                    {{ category.name }}
-                </p>
-                <div class="absolute bottom-[-20%] left-[30%] rotate-[-15deg] w-full">
-                    <img class="w-[90%] h-auto object-cover" :src="category.image" alt="" />
+    </div>
+    <div class="mt-[100px]">
+        <h4 class="text-center text-gray-600">Все категории</h4>
+        <!-- <div
+            class="max-w-[900px] h-[200px] w-full px-5 mx-auto gap-x-5 grid grid-cols-2 md:grid-cols-4 grid-rows-2 md:grid-rows-1 ">
+            <NuxtLink v-for="category in categories" class="block rounded-md px-3 py-2" :class="category.bg"
+                :to="`/categories?name=${category.paramName}`">
+                <div class="text-primary font-bold">
+                    <p>{{ category.name }}</p>
                 </div>
-            </div>
-        </div>
+            </NuxtLink>
+        </div> -->
+        <div class="mt-[30px]">
+        <SelectedTags />
     </div>
-    <div class=" mt-3">
-        <SelectedTags is-animated />
     </div>
-    <div class=" bg-gray-50 my-[60px] text-black">
-        <Container class="my-7">
-            <div>
-                <h3>
-                    О нас
-                </h3>
-                <p class="w-[50%]">
-                    Мы предлагаем широкий ассортимент товаров, таких как футболки, кружки, ручки, кепки, сумки, чехлы для
-                    телефонов и многое другое. Вы можете выбрать любой дизайн из нашего каталога или заказать
-                    индивидуальный,
-                    который отражает вашу уникальность и стиль. Мы гарантируем высокое качество продукции, быструю доставку
-                    и
-                    доступные цены
-                </p>
-            </div>
-        </Container>
-    </div>
-    <div class="container mt-7">
-        <div class="mt-[60px]">
-            <h2 class="text-2xl font-bold mb-4 text-center text-[#2D2D2D]">Новинки</h2>
-            <NewProducts />
-        </div>
+
+    <div class="mt-[120px]">
+        <h3 class="text-center">Новые товары</h3>
+        <NewProducts />
     </div>
 </template>
 
 <script setup>
-import NewProducts from "@/components/NewProducts";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/vue"
-import { EffectFade } from "swiper/modules"
-import "swiper/css"
-import "swiper/css/effect-fade"
+import { ref, reactive } from "vue";
+let categories = reactive(useCategories().categories.slice(0, 4));
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Navigation, Autoplay, EffectFade } from "swiper/modules"
+import "swiper/css";
+import "swiper/css/navigation";
+import 'animate.css';
 
+const prev = ref(null);
+const next = ref(null);
 
-const popularCategories = [
-    { name: "Ручки", paramName: "pens", bg: "#FA7921", image: "" },
-    { name: "Термосы, термостаканы", paramName: "thermoses", bg: "#FE9920" },
-    { name: "Блокноты", paramName: "notebooks", bg: "#B9A44C" },
-    { name: "Футболки, Поло", paramName: "tshirts", bg: "#FFE900", image: "https://i.imgur.com/uwiDKUb.png" }
-]
+let bgs = ["bg-amber-300", "bg-[#FBBC17]", "bg-[#F6A12D]", "bg-[#ED6A5A]"];
 
-let swiper = null;
+let isMobile = useMobile().isMobile;
 
-
-onMounted(() => {
-    swiper = document.getElementById("swiper").swiper;
+categories.map((category, index) => {
+    Object.assign(category, {
+        bg: bgs[index]
+    })
 })
-
-function swiperSlideTo(i) {
-    swiper.slideTo(i);
-}
 </script>
 
 <style scoped lang="scss">
 .main-slide {
-    position: relative;
-    border-radius: 6px;
-    // background: linear-gradient(45deg, #1e3b7249, #2a52989d), url("https://i.imgur.com/pKUyI6e.png");
-    background: linear-gradient(135deg, #197149, #CCFF66);
-
-    div {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        width: 100%;
-
-        h1 {
-            font-size: clamp(3rem, 5vw, 4rem);
-            font-weight: 700;
-        }
-
-        p {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            text-align: center;
-            margin: 0 10px;
-        }
-    }
+    background-image: url("https://c02.purpledshub.com/uploads/sites/41/2021/08/mountains-7ddde89.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 </style>

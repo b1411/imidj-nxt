@@ -1,10 +1,9 @@
 <template>
-    <div>
-        <VApp>
-            <AppHeader />
-            <!-- <Drawer /> -->
-            <slot />
-        </VApp>
-
-    </div>
+    <VApp>
+        <AppHeader />
+        <Drawer />
+        <div class="fix-fixed-margin">
+            <slot name="page" />
+        </div>
+    </VApp>
 </template>

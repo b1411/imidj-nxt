@@ -28,19 +28,19 @@ onMounted(async () => {
         }
     });
 
-    let productsQuery = new parse.Query("products");
-    productsQuery.include("category_id");
+    // let productsQuery = new parse.Query("products");
+    // productsQuery.include("category_id");
 
-    productsQuery.limit(9);
+    // productsQuery.limit(9);
 
-    const products2 = await productsQuery.find();
-    let products2Array = Array.from(products2.values());
-    for (let product of products2Array) {
-        (async () => {
-            let category = await product.get("category_id").fetch();
-            console.log(category.get("category_name"));
-        })();
-    }
+    // const products2 = await productsQuery.find();
+    // let products2Array = Array.from(products2.values());
+    // for (let product of products2Array) {
+    //     (async () => {
+    //         let category = await product.get("category_id").fetch();
+    //         console.log(category.get("category_name"));
+    //     })();
+    // }
 });
 onUnmounted(() => {
     products.value = [];

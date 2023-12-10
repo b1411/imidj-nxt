@@ -1,10 +1,10 @@
 <template>
   <div>
     <main id="main">
-     
       <NuxtLayout>
-        <PageLoader v-show="loading" />
-        <NuxtPage />
+        <template v-slot:page>
+          <NuxtPage />
+        </template>
       </NuxtLayout>
     </main>
   </div>
@@ -12,16 +12,6 @@
 
 <script setup>
 const nuxtApp = useNuxtApp();
-const loading = ref(true);
-nuxtApp.hook("page:start", () => {
-  loading.value = true;
-  document.querySelector("body").classList.add("overflow-hidden");
-});
-nuxtApp.hook("page:finish", () => {
-  loading.value = false;
-  document.querySelector("body").classList.remove("overflow-hidden");
-});
 
-
-const drawer = useState('drawer', () => false)
+const drawer = useState("drawer", () => false);
 </script>

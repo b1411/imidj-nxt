@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full w-screen absolute z-[230] top-0 left-0 bg-white">
+    <div class="h-screen w-screen absolute z-[230] top-0 left-0 bg-white">
         <span class="loader absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"></span>
     </div>
 </template>
@@ -8,46 +8,21 @@
 .loader {
     width: 48px;
     height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: #197149;
     border-radius: 50%;
-    position: relative;
-    animation: rotate 1s linear infinite
-}
-
-.loader::before {
-    content: "";
+    display: inline-block;
     box-sizing: border-box;
-    position: absolute;
-    inset: 0px;
-    border-radius: 50%;
-    border: 5px solid #197149;
-    animation: prixClipFix 2s linear infinite;
+    animation: rotation 1s linear infinite;
 }
 
-@keyframes rotate {
-    100% {
-        transform: rotate(360deg)
-    }
-}
-
-@keyframes prixClipFix {
+@keyframes rotation {
     0% {
-        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
-    }
-
-    25% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0)
-    }
-
-    50% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
-    }
-
-    75% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%)
+        transform: rotate(0deg);
     }
 
     100% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
+        transform: rotate(360deg);
     }
 }
 </style>
